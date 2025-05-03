@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  elidbot:
+    build: .
+    container_name: elidbot
+    env_file:
+      - .env
+    command: mix run --no-halt
+    restart: unless-stopped
