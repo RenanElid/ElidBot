@@ -1,5 +1,4 @@
 defmodule ElidBot.Commands.Palavra do
-  @moduledoc false
   alias Nostrum.Api.Message
   require Logger
 
@@ -10,10 +9,12 @@ defmodule ElidBot.Commands.Palavra do
       {:ok, %{status_code: 200, body: body}} ->
         case Jason.decode(body) do
           {:ok, %{"word" => palavra}} ->
+
             Message.create(msg.channel_id, "📘 **Palavra aleatória:** #{palavra}")
 
           _ ->
             Message.create(msg.channel_id, "Erro ao interpretar a palavra da API.")
+
         end
 
       {:error, _reason} ->
