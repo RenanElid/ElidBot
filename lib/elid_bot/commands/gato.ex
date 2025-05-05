@@ -1,5 +1,4 @@
 defmodule ElidBot.Commands.Gato do
-  @moduledoc false
   alias Nostrum.Api.Message
   require Logger
 
