@@ -1,6 +1,6 @@
 defmodule ElidBot.Commands.Palavra do
   @moduledoc false
-  alias Nostrum.Api
+  alias Nostrum.Api.Message
   require Logger
 
   @url "https://api.dicionario-aberto.net/random"
@@ -10,14 +10,14 @@ defmodule ElidBot.Commands.Palavra do
       {:ok, %{status_code: 200, body: body}} ->
         case Jason.decode(body) do
           {:ok, %{"word" => palavra}} ->
-            Api.create_message(msg.channel_id, "📘 **Palavra aleatória:** #{palavra}")
+            Message.create(msg.channel_id, "📘 **Palavra aleatória:** #{palavra}")
 
           _ ->
-            Api.create_message(msg.channel_id, "Erro ao interpretar a palavra da API.")
+            Message.create(msg.channel_id, "Erro ao interpretar a palavra da API.")
         end
 
       {:error, _reason} ->
-        Api.create_message(msg.channel_id, "Não consegui acessar a API de palavras no momento.")
+        Message.create(msg.channel_id, "Não consegui acessar a API de palavras no momento.")
     end
   end
 end

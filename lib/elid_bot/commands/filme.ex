@@ -1,6 +1,6 @@
 defmodule ElidBot.Commands.Filme do
   @moduledoc false
-  alias Nostrum.Api
+  alias Nostrum.Api.Message
   require Logger
 
   @api_key "dc4cfcf038518a955270c2cc78774cdf"
@@ -17,14 +17,14 @@ defmodule ElidBot.Commands.Filme do
             poster_url = "https://image.tmdb.org/t/p/w500#{filme["poster_path"]}"
 
             mensagem = "**#{titulo}**\n#{descricao}\n#{poster_url}"
-            Api.create_message(msg.channel_id, mensagem)
+            Message.create(msg.channel_id, mensagem)
 
           _ ->
-            Api.create_message(msg.channel_id, "Erro ao entender a resposta da API de filmes.")
+            Message.create(msg.channel_id, "Erro ao entender a resposta da API de filmes.")
         end
 
       {:error, _reason} ->
-        Api.create_message(msg.channel_id, "Não consegui acessar a API de filmes no momento.")
+        Message.create(msg.channel_id, "Não consegui acessar a API de filmes no momento.")
     end
   end
 end

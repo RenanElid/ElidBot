@@ -1,5 +1,5 @@
 defmodule ElidBot.Commands.Pokemon do
-  alias Nostrum.Api
+  alias Nostrum.Api.Message
 
   def run(msg) do
     id = :rand.uniform(151)
@@ -12,10 +12,10 @@ defmodule ElidBot.Commands.Pokemon do
         name = data["name"]
         sprite = data["sprites"]["front_default"]
 
-        Api.create_message(msg.channel_id, "#{String.capitalize(name)}\n#{sprite}")
+        Message.create(msg.channel_id, "#{String.capitalize(name)}\n#{sprite}")
 
       _ ->
-        Api.create_message(msg.channel_id, "Não consegui acessar a API de Pokémon.")
+        Message.create(msg.channel_id, "Não consegui acessar a API de Pokémon.")
     end
   end
 end
